@@ -17,7 +17,6 @@
     "recursive"
   ],
   "devDependencies": {
-    "mkcli": "~1.0.32",
     "chai": "~3.5.0",
     "istanbul": "~0.4.4",
     "mocha": "~3.2.0"
