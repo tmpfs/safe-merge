@@ -28,7 +28,7 @@ function recopy(input) {
 }
 
 function create(source) {
-  if(typeof(source.clone) === 'function') {
+  if(source && typeof(source.clone) === 'function') {
     return source.clone();
   }else if((source instanceof RegExp)) {
     return recopy(source); 
