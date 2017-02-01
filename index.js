@@ -106,7 +106,7 @@ function merge(source, ...inputs) {
     loop(input, output);
   }
 
-  console.dir(output)
+  //console.dir(output)
 
   return output;
 }
