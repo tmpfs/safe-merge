@@ -15,6 +15,12 @@ describe('safe-merge:', function() {
 
     expect(output).to.eql([new MockClone(), 2, 3]);
 
+    // check it is an instanceof
+    expect(output[0]).to.be.an.instanceof(MockClone);
+
+    // check that they are different instances
+    expect(output[0]).to.not.equal(input[0]);
+
     done();
   })
 

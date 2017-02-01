@@ -83,6 +83,8 @@ function merge(source, ...inputs) {
   }
 
   function loop(input, output) {
+    // NOTE: input order when iterating arrays with for...in is not guaranteed
+    // NOTE: however in practice it appears implementations do it in order
     for(let k in input) {
       // only merge own properties
       if(!input.hasOwnProperty(k)) {
