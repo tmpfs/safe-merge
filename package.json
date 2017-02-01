@@ -12,7 +12,9 @@
     "url": "https://github.com/tmpfs/safe-merge/issues"
   },
   "keywords": [
-    "merge"
+    "merge",
+    "safe",
+    "recursive"
   ],
   "devDependencies": {
     "mkcli": "~1.0.32",
