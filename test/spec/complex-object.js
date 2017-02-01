@@ -13,5 +13,12 @@ describe('safe-merge:', function() {
     done();
   })
 
+  it('should merge complex objects', function(done) {
+    const input = {server: {port: 1111}};
+    const output = merge(input, {server: {ghostMode: false}});
+    expect(output).to.eql({server: {port: 1111, ghostMode: false}});
+    done();
+  })
+
 })
 

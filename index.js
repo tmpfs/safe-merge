@@ -27,7 +27,7 @@ function recopy(input) {
   return new RegExp(ptn, flags);
 }
 
-function create(source) {
+function create(source, ...params) {
   if(source && typeof(source.clone) === 'function') {
     return source.clone();
   }else if((source instanceof RegExp)) {
@@ -40,7 +40,7 @@ function create(source) {
   }else if(Array.isArray(source)) {
     return source.slice(0);
   }else if(complex(source)) {
-    return Object.assign({}, source); 
+    return Object.assign.apply(null, [{}, source].concat(params)); 
   }
 
   // simple type
@@ -66,7 +66,16 @@ function merge(source, ...inputs) {
         throw new Error(
           `cyclical reference detected on ${key}, cannot merge`);
       }
-      output[key] = loop(val, create(val));
+
+      let copy;
+
+      if(complex(output[key])) {
+        copy = create(val, output[key]);
+      }else{
+        copy = create(val);
+      }
+
+      output[key] = loop(val, copy);
     }else{
       output[key] = create(val);
     }
@@ -91,6 +100,7 @@ function merge(source, ...inputs) {
       if(!input.hasOwnProperty(k)) {
         continue; 
       }
+
       iterate(input, output, k);
     }
     return output;
