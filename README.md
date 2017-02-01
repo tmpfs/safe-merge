@@ -1,5 +1,9 @@
 # Safe Merge
 
+[![Build Status](https://travis-ci.org/tmpfs/safe-merge.svg?v=8)](https://travis-ci.org/tmpfs/safe-merge)
+[![npm version](http://img.shields.io/npm/v/safe-merge.svg?v=8)](https://npmjs.org/package/safe-merge)
+[![Coverage Status](https://coveralls.io/repos/tmpfs/safe-merge/badge.svg?branch=master&service=github&v=8)](https://coveralls.io/github/tmpfs/safe-merge?branch=master)
+
 Fast and safe object merge that does not mangle complex instances.
 
 * Tiny ES6 code, ~100 LOC
@@ -9,10 +13,6 @@ Fast and safe object merge that does not mangle complex instances.
 * Complex instances by pointer
 * Copies RegExp instances
 * Errors on circular reference
-
-[![Build Status](https://travis-ci.org/tmpfs/safe-merge.svg?v=8)](https://travis-ci.org/tmpfs/safe-merge)
-[![npm version](http://img.shields.io/npm/v/safe-merge.svg?v=8)](https://npmjs.org/package/safe-merge)
-[![Coverage Status](https://coveralls.io/repos/tmpfs/safe-merge/badge.svg?branch=master&service=github&v=8)](https://coveralls.io/github/tmpfs/safe-merge?branch=master)
 
 ---
 

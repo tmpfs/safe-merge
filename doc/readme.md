@@ -1,5 +1,7 @@
 # Safe Merge
 
+<? @include {=readme} badges.md ?>
+
 Fast and safe object merge that does not mangle complex instances.
 
 * Tiny ES6 code, ~100 LOC
@@ -9,8 +11,6 @@ Fast and safe object merge that does not mangle complex instances.
 * Complex instances by pointer
 * Copies RegExp instances
 * Errors on circular reference
-
-<? @include {=readme} badges.md ?>
 
 ***
 <!-- @toc -->
