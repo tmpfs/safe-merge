@@ -62,7 +62,6 @@ function merge(source, ...inputs) {
 
     if(complex(val)) {
       if(val.__visited) {
-        untaint(val);
         throw new Error(
           `cyclical reference detected on ${key}, cannot merge`);
       }
@@ -86,10 +85,10 @@ function merge(source, ...inputs) {
     try {
       recurse(source, output, key);
     }catch(e) {
-      untaint(source);
       throw e;
+    }finally {
+      untaint(source);
     }
-    untaint(source);
   }
 
   function loop(input, output) {

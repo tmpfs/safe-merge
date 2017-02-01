@@ -14,6 +14,8 @@ describe('safe-merge:', function() {
       merge({}, input);
     }
 
+    console.log(a.__visited)
+
     expect(fn).throws(Error);
 
     done();
