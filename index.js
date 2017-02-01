@@ -3,7 +3,8 @@ function complex(o) {
 }
 
 function taint(source) {
-  source.__visited = true;
+  Object.defineProperty(source, '__visited',
+    {value: true, enumerable: false, configurable: true});
 }
 
 function untaint(source) {
@@ -29,10 +30,15 @@ function recopy(input) {
 function create(source) {
   if(typeof(source.clone) === 'function') {
     return source.clone();
-  }else if(Array.isArray(source)) {
-    return source.slice(0);
   }else if((source instanceof RegExp)) {
     return recopy(source); 
+  }else if(complex(source)
+    && source.constructor
+    && (source.constructor.name !== 'Object'
+    && source.constructor.name !== 'Array')) {
+    return source;
+  }else if(Array.isArray(source)) {
+    return source.slice(0);
   }else if(complex(source)) {
     return Object.assign({}, source); 
   }
@@ -60,11 +66,6 @@ function merge(source, ...inputs) {
         throw new Error(
           `cyclical reference detected on ${key}, cannot merge`);
       }
-
-      //console.log('merging on complex %s', key);
-      //console.log('merging on complex %j', val);
-
-      //return recurse(val, create(val), key);
       output[key] = loop(val, create(val));
     }else{
       output[key] = create(val);
@@ -99,16 +100,12 @@ function merge(source, ...inputs) {
   let input, i;
   for(i = 0;i < inputs.length;i++) {
     input = inputs[i];
-
     // input is not a complex object, ignore it
     if(!complex(input)) {
       continue; 
     }
-
     loop(input, output);
   }
-
-  //console.dir(output)
 
   return output;
 }
