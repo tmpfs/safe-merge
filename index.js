@@ -31,7 +31,7 @@ function create(source, ...params) {
   if(source && typeof(source.clone) === 'function') {
     return source.clone();
   }else if((source instanceof RegExp)) {
-    return recopy(source); 
+    return recopy(source);
   }else if(complex(source)
     && source.constructor
     && (source.constructor.name !== 'Object'
@@ -40,7 +40,7 @@ function create(source, ...params) {
   }else if(Array.isArray(source)) {
     return source.slice(0);
   }else if(complex(source)) {
-    return Object.assign.apply(null, [{}, source].concat(params)); 
+    return Object.assign.apply(null, [{}, source].concat(params));
   }
 
   // simple type
@@ -51,7 +51,7 @@ function merge(source, ...inputs) {
 
   // not a complex object - nothing to be done
   if(!complex(source)) {
-    return source; 
+    return source;
   }
 
   // we always create a copy
@@ -74,7 +74,11 @@ function merge(source, ...inputs) {
         copy = create(val);
       }
 
-      output[key] = loop(val, copy);
+      if(Array.isArray(output[key]) && Array.isArray(val)) {
+        output[key] = output[key].concat(loop(val, copy));
+      }else{
+        output[key] = loop(val, copy);
+      }
     }else{
       output[key] = create(val);
     }
@@ -97,7 +101,7 @@ function merge(source, ...inputs) {
     for(let k in input) {
       // only merge own properties
       if(!input.hasOwnProperty(k)) {
-        continue; 
+        continue;
       }
 
       iterate(input, output, k);
@@ -111,7 +115,7 @@ function merge(source, ...inputs) {
     input = inputs[i];
     // input is not a complex object, ignore it
     if(!complex(input)) {
-      continue; 
+      continue;
     }
     loop(input, output);
   }
